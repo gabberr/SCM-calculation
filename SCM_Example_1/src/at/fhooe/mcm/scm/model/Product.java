@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Product {
 	ArrayList<Part> parts = new ArrayList();
+	
 	public Product(ArrayList<Part> _parts) {
 		parts = _parts;
 	}
