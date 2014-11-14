@@ -1,5 +1,9 @@
 package at.fhooe.mcm.scm;
 
+import java.util.ArrayList;
+
+import at.fhooe.mcm.scm.model.Week;
+
 public class Calculation {
 
 	public Parser p = new Parser();
@@ -10,8 +14,8 @@ public class Calculation {
 		// TODO Auto-generated method stub
 		Parser p = new Parser();
 		
-		
-		p.parseObjects();
+		ArrayList<Week> weeks = p.parseObjects();
+		//p.parseWeek("input line");
 	}
 
 }
