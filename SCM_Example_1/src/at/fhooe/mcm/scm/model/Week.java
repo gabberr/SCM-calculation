@@ -43,39 +43,41 @@ public class Week {
 	}
 
 	public int getTotalP1(){
-		int sum = 0;
-		for(int i = 0; i < products.size(); i++){
-			sum += products.get(i).getP1();
-		}
-		return sum;
+
+		return nOfA* proA.getP1() 
+			+ nOfB * proB.getP1()
+			+ nOfC * proC.getP1()
+			+ nOfD * proD.getP1()
+			+ nOfE * proE.getP1();
+		
 	}
 	public int getTotalP2(){
-		int sum = 0;
-		for(int i = 0; i < products.size(); i++){
-			sum += products.get(i).getP2();
-		}
-		return sum;
+		return nOfA* proA.getP2() 
+				+ nOfB * proB.getP2()
+				+ nOfC * proC.getP2()
+				+ nOfD * proD.getP2()
+				+ nOfE * proE.getP2();
 	}
 	public int getTotalP3(){
-		int sum = 0;
-		for(int i = 0; i < products.size(); i++){
-			sum += products.get(i).getP3();
-		}
-		return sum;
+		return nOfA* proA.getP3() 
+				+ nOfB * proB.getP3()
+				+ nOfC * proC.getP3()
+				+ nOfD * proD.getP3()
+				+ nOfE * proE.getP3();
 	}
 	public int getTotalP4(){
-		int sum = 0;
-		for(int i = 0; i < products.size(); i++){
-			sum += products.get(i).getP4();
-		}
-		return sum;
+		return nOfA* proA.getP4() 
+				+ nOfB * proB.getP4()
+				+ nOfC * proC.getP4()
+				+ nOfD * proD.getP4()
+				+ nOfE * proE.getP4();
 	}
 	public int getTotalP5(){
-		int sum = 0;
-		for(int i = 0; i < products.size(); i++){
-			sum += products.get(i).getP5();
-		}
-		return sum;
+		return nOfA* proA.getP5() 
+				+ nOfB * proB.getP5()
+				+ nOfC * proC.getP5()
+				+ nOfD * proD.getP5()
+				+ nOfE * proE.getP5();
 	}
 	public void printWeekOrderByParts() {
 		System.out.println(weekName + " P1: " +getTotalP1() +
