@@ -25,12 +25,70 @@ public class Stock {
 	
 	public void iterate(){
 		//checkRequiredOrders();
+		iteration++;
+	}
+	
+	public boolean outOfStock(){
+		if(nOfP1 < 0 || nOfP2 < 0 || nOfP3 < 0 || nOfP4 < 0 || nOfP5 <0){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
+	public void estimateOrders(ArrayList<Week> weekList){
+		double averageProductA = 0;
+		double averageProductB = 0;
+		double averageProductC = 0;
+		double averageProductD = 0;
+		double averageProductE = 0;
 		
-		iteration ++;
+		for(int i = 0; i < weekList.size(); i++){
+			averageProductA += weekList.get(i).nOfA;
+			averageProductB += weekList.get(i).nOfB;
+			averageProductC += weekList.get(i).nOfC;
+			averageProductD += weekList.get(i).nOfD;
+			averageProductE += weekList.get(i).nOfE;
+		}
+		averageProductA /= weekList.size();
+		averageProductB /= weekList.size();
+		averageProductC /= weekList.size();
+		averageProductD /= weekList.size();
+		averageProductE /= weekList.size();
 	}
+	
 	public void restock(){
-		for 
+		for(int z = 0; z < placedOrders.size(); z++){
+			if(placedOrders.get(z).isCurrentWeek(iteration)){
+				switch (placedOrders.get(z).partId) {
+				case 1:
+					nOfP1+= placedOrders.get(z).ammount;
+					break;
+				case 2:
+					nOfP2+= placedOrders.get(z).ammount;
+					break;
+				case 3:
+					nOfP3+= placedOrders.get(z).ammount;
+					break;
+				case 4:
+					nOfP4+= placedOrders.get(z).ammount;
+					break;
+				case 5:
+					nOfP5+= placedOrders.get(z).ammount;;
+					break;
+				}
+			}
+		}
 	}
+	
+	public void produce(Week w){
+		nOfP1 -= w.getTotalP1();
+		nOfP2 -= w.getTotalP2();
+		nOfP3 -= w.getTotalP3();
+		nOfP4 -= w.getTotalP4();
+		nOfP5 -= w.getTotalP5();
+	}
+	
 	public void placeOrder(int partId, int ammount) {
 		
 		switch (partId) {

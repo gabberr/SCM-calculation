@@ -31,24 +31,30 @@ public class Calculation {
 		//p.parseWeek("input line");
 		Stock s = new Stock();
 		ArrayList<Week> weeks = p.parseObjects();
+		ArrayList<Week> inputWeeks = p.parseObjects();
 		int i = 0;
 		int counter = 0;
 		int weekNumber = 60;
-		while(i < 20){
-			
+		while(i < inputWeeks.size()){			
+			s.restock();
+			//check if out of stock
+			if(s.outOfStock()){
+				System.out.println("Out of stock");
+				break;
+			}
+			//produce orders
+			s.produce(inputWeeks.get(i));
 			s.iterate();
+			//estimate
 			
-			
-//			nOfP1 -= weeks.get(i).getTotalP1();
-//			nOfP2 -= weeks.get(i).getTotalP2();
-//			nOfP3 -= weeks.get(i).getTotalP3();
-//			nOfP4 -= weeks.get(i).getTotalP4();
-//			nOfP5 -= weeks.get(i).getTotalP5();
-	//		System.out.println(nOfP1 + " ; " + nOfP2 + " ; " + nOfP3 + " ; " + nOfP4 + " ; " +nOfP5);
 			i++;	
 			weekNumber ++;
 		}
 		System.out.println("Over");
+	}
+	
+	public void estimateOrders(int partId){
+		
 	}
 //	
 //	public void calculation(){
