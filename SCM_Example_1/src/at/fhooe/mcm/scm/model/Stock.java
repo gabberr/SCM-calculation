@@ -55,6 +55,9 @@ public class Stock {
 		averageProductC /= weekList.size();
 		averageProductD /= weekList.size();
 		averageProductE /= weekList.size();
+		
+		ProductA a = new ProductA();
+		double averagePart1 = averageProductA * a.getP1() + averageProductB;
 	}
 	
 	public void restock(){
