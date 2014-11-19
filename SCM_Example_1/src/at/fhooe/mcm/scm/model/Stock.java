@@ -57,8 +57,36 @@ public class Stock {
 		averageProductE /= weekList.size();
 		
 		ProductA a = new ProductA();
-		double averagePart1 = averageProductA * a.getP1() + averageProductB;
+		ProductB b = new ProductB();
+		ProductC c = new ProductC();
+		ProductD d = new ProductD();
+		ProductE e = new ProductE();
+		
+		double averagePart1 = 0;
+		double averagePart2 = 0;
+		double averagePart3 = 0;
+		double averagePart4 = 0;
+		double averagePart5 = 0;
+		
+		for(int i = 0; i < weekList.size(); i++){
+			Week w = weekList.get(i);
+			
+			averagePart1 += w.nOfA * a.getP1() + w.nOfB * b.getP1() + w.nOfC * c.getP1() + w.nOfD * d.getP1() + w.nOfE * e.getP1();
+			averagePart2 += w.nOfA * a.getP2() + w.nOfB * b.getP2() + w.nOfC * c.getP2() + w.nOfD * d.getP2() + w.nOfE * e.getP2();
+			averagePart3 += w.nOfA * a.getP3() + w.nOfB * b.getP3() + w.nOfC * c.getP3() + w.nOfD * d.getP3() + w.nOfE * e.getP3();
+			averagePart4 += w.nOfA * a.getP4() + w.nOfB * b.getP4() + w.nOfC * c.getP4() + w.nOfD * d.getP4() + w.nOfE * e.getP4();
+			averagePart5 += w.nOfA * a.getP5() + w.nOfB * b.getP5() + w.nOfC * c.getP5() + w.nOfD * d.getP5() + w.nOfE * e.getP5();
+		}
+		averagePart1 /= weekList.size();
+		averagePart2 /= weekList.size();
+		averagePart3 /= weekList.size();
+		averagePart4 /= weekList.size();
+		averagePart5 /= weekList.size();
+		
 	}
+	
+	
+	
 	
 	public void restock(){
 		for(int z = 0; z < placedOrders.size(); z++){
