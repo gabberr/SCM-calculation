@@ -37,12 +37,23 @@ public class Stock {
 	}
 	
 	public void estimateOrders(ArrayList<Week> weekList){
+		
+		ProductA a = new ProductA();
+		ProductB b = new ProductB();
+		ProductC c = new ProductC();
+		ProductD d = new ProductD();
+		ProductE e = new ProductE();
+		
+		
 		double averageProductA = 0;
 		double averageProductB = 0;
 		double averageProductC = 0;
 		double averageProductD = 0;
 		double averageProductE = 0;
 		
+		/*
+		 * How many product were ordered weekly
+		 */
 		for(int i = 0; i < weekList.size(); i++){
 			averageProductA += weekList.get(i).nOfA;
 			averageProductB += weekList.get(i).nOfB;
@@ -56,12 +67,11 @@ public class Stock {
 		averageProductD /= weekList.size();
 		averageProductE /= weekList.size();
 		
-		ProductA a = new ProductA();
-		ProductB b = new ProductB();
-		ProductC c = new ProductC();
-		ProductD d = new ProductD();
-		ProductE e = new ProductE();
 		
+		
+		/*
+		 * How many of Px we needed peer week on average to fulfill the product orders
+		 */
 		double averagePart1 = 0;
 		double averagePart2 = 0;
 		double averagePart3 = 0;
@@ -69,8 +79,7 @@ public class Stock {
 		double averagePart5 = 0;
 		
 		for(int i = 0; i < weekList.size(); i++){
-			Week w = weekList.get(i);
-			
+			Week w = weekList.get(i);	
 			averagePart1 += w.nOfA * a.getP1() + w.nOfB * b.getP1() + w.nOfC * c.getP1() + w.nOfD * d.getP1() + w.nOfE * e.getP1();
 			averagePart2 += w.nOfA * a.getP2() + w.nOfB * b.getP2() + w.nOfC * c.getP2() + w.nOfD * d.getP2() + w.nOfE * e.getP2();
 			averagePart3 += w.nOfA * a.getP3() + w.nOfB * b.getP3() + w.nOfC * c.getP3() + w.nOfD * d.getP3() + w.nOfE * e.getP3();
@@ -85,6 +94,49 @@ public class Stock {
 		
 	}
 	
+	/* 
+	 * calculate the total of Px that are already placed in an order for the stock
+	 */
+	int  getTotalPlacedPart1 () {
+		int n = 0;
+		for(int z = 0; z < placedOrders.size(); z++){
+			if(placedOrders.get(z).partId == 1)
+				n+= placedOrders.get(z).ammount;
+		}
+		return n;
+	}
+	int  getTotalPlacedPart2 () {
+		int n = 0;
+		for(int z = 0; z < placedOrders.size(); z++){
+			if(placedOrders.get(z).partId == 2)
+				n+= placedOrders.get(z).ammount;
+		}
+		return n;
+	}
+	int  getTotalPlacedPart3 () {
+		int n = 0;
+		for(int z = 0; z < placedOrders.size(); z++){
+			if(placedOrders.get(z).partId == 3)
+				n+= placedOrders.get(z).ammount;
+		}
+		return n;
+	}
+	int  getTotalPlacedPart4 () {
+		int n = 0;
+		for(int z = 0; z < placedOrders.size(); z++){
+			if(placedOrders.get(z).partId == 4)
+				n+= placedOrders.get(z).ammount;
+		}
+		return n;
+	}
+	int  getTotalPlacedPart5 () {
+		int n = 0;
+		for(int z = 0; z < placedOrders.size(); z++){
+			if(placedOrders.get(z).partId == 5)
+				n+= placedOrders.get(z).ammount;
+		}
+		return n;
+	}
 	
 	
 	
