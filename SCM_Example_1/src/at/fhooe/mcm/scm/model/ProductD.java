@@ -31,5 +31,9 @@ public class ProductD implements ProductIF {
 		
 		return 2;
 	}
+	@Override
+	public String toString() {
+		return "ProductD";
+	}
 
 }

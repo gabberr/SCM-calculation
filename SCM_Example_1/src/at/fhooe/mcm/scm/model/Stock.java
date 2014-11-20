@@ -17,6 +17,7 @@ public class Stock {
 	public static int reorderTimePart5 = 1;
 	
 	public int iteration;
+	// these are the orders for parts, not to be confused with week orders of products
 	ArrayList<Order> placedOrders = new ArrayList<Order>();
 	
 	public Stock(){
@@ -92,18 +93,56 @@ public class Stock {
 		averagePart4 /= weekList.size();
 		averagePart5 /= weekList.size();
 		
+		/* 
+		 * 
+		 */
+		
 	}
 	
 	/* 
 	 * calculate the total of Px that are already placed in an order for the stock
 	 */
-	int  getTotalPlacedPart (int partId) {
+	int  getTotalPlacedPart(int partId) {
 		int n = 0;
 		for(int z = 0; z < placedOrders.size(); z++){
 			if(placedOrders.get(z).partId == partId)
 				n+= placedOrders.get(z).ammount;
 		}
 		return n;
+	}
+	
+	/*
+	 * Can we produce all of the products for the week order ( parts needed are in stock)
+	 */
+	boolean isAllProducable(Week weekOrder) {
+			
+		return     weekOrder.getTotalP1() <= nOfP1
+				&& weekOrder.getTotalP2() <= nOfP2
+				&& weekOrder.getTotalP3() <= nOfP3
+				&& weekOrder.getTotalP4() <= nOfP4
+				&& weekOrder.getTotalP5() <= nOfP5;
+	}
+	
+	/*
+	 * All products of same type in week
+	 */
+	boolean isProductProducable(Week weekOrder, ProductIF p) {
+		int N  = weekOrder.nOfA;
+		return	   N * p.getP1() <= nOfP1
+				&& N * p.getP2() <= nOfP2
+				&& N * p.getP3() <= nOfP3
+				&& N * p.getP4() <= nOfP4
+				&& N * p.getP5() <= nOfP5;
+	}
+	/*
+	 * A single product
+	 */
+	boolean isSingleProductProducable(ProductIF p) {
+		return     p.getP1() <= nOfP1
+				&& p.getP2() <= nOfP2
+				&& p.getP3() <= nOfP3
+				&& p.getP4() <= nOfP4
+				&& p.getP5() <= nOfP5;
 	}
 	
 	
@@ -132,12 +171,37 @@ public class Stock {
 		}
 	}
 	
-	public void produce(Week w){
+	/*
+	 * Produces whole week
+	 */
+	public void produceAll(Week w){
 		nOfP1 -= w.getTotalP1();
 		nOfP2 -= w.getTotalP2();
 		nOfP3 -= w.getTotalP3();
 		nOfP4 -= w.getTotalP4();
 		nOfP5 -= w.getTotalP5();
+		
+		LOG("Produced the whole week:" + w.toString() );
+	}
+	
+	/*
+	 * Produces all products of same type
+	 * returns the number of products that couldnt be produced
+	 */
+	public int produceProductOfQuantity(ProductIF p, int quantity) {
+		int produced = 0;
+		// until we can still produce and we didnt produced all quantity
+		while( isSingleProductProducable(p) && produced < quantity) {
+			nOfP1 -=  p.getP1();
+			nOfP2 -=  p.getP2();
+			nOfP3 -=  p.getP3();
+			nOfP4 -=  p.getP4();
+			nOfP5 -=  p.getP5();
+			produced++;
+		}
+		LOG("Produced product " + p.toString() + " :  "+produced + "/" + quantity);
+		
+		return quantity -produced;
 	}
 	
 	public void placeOrder(int partId, int ammount) {
@@ -168,6 +232,9 @@ public class Stock {
 			break;
 		}
 
+	}
+	public static void LOG(String text) {
+		System.out.println(text);
 	}
 	private class Order {
 		int weekOfDelivery;

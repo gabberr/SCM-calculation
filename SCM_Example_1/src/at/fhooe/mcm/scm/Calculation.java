@@ -43,7 +43,8 @@ public class Calculation {
 				break;
 			}
 			//produce orders
-			s.produce(inputWeeks.get(i));
+			
+//			s.produce(inputWeeks.get(i));
 			s.iterate();
 			//estimate
 			
