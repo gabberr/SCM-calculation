@@ -97,42 +97,10 @@ public class Stock {
 	/* 
 	 * calculate the total of Px that are already placed in an order for the stock
 	 */
-	int  getTotalPlacedPart1 () {
+	int  getTotalPlacedPart (int partId) {
 		int n = 0;
 		for(int z = 0; z < placedOrders.size(); z++){
-			if(placedOrders.get(z).partId == 1)
-				n+= placedOrders.get(z).ammount;
-		}
-		return n;
-	}
-	int  getTotalPlacedPart2 () {
-		int n = 0;
-		for(int z = 0; z < placedOrders.size(); z++){
-			if(placedOrders.get(z).partId == 2)
-				n+= placedOrders.get(z).ammount;
-		}
-		return n;
-	}
-	int  getTotalPlacedPart3 () {
-		int n = 0;
-		for(int z = 0; z < placedOrders.size(); z++){
-			if(placedOrders.get(z).partId == 3)
-				n+= placedOrders.get(z).ammount;
-		}
-		return n;
-	}
-	int  getTotalPlacedPart4 () {
-		int n = 0;
-		for(int z = 0; z < placedOrders.size(); z++){
-			if(placedOrders.get(z).partId == 4)
-				n+= placedOrders.get(z).ammount;
-		}
-		return n;
-	}
-	int  getTotalPlacedPart5 () {
-		int n = 0;
-		for(int z = 0; z < placedOrders.size(); z++){
-			if(placedOrders.get(z).partId == 5)
+			if(placedOrders.get(z).partId == partId)
 				n+= placedOrders.get(z).ammount;
 		}
 		return n;
