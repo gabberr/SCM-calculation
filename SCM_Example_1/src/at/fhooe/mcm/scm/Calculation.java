@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import at.fhooe.mcm.scm.model.Stock;
 import at.fhooe.mcm.scm.model.Week;
 
+/**
+ * Calculation class for stock order estimation
+ * @author Koller/Gaber
+ *
+ */
 public class Calculation {
 
 	public Parser p = new Parser();
@@ -24,17 +29,17 @@ public class Calculation {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Parser p = new Parser();
-//		Calculation c = new Calculation();
-//		c.calculation();
-		//p.parseWeek("input line");
-		Stock s = new Stock();
+		
+		//initialize stock
+		Stock s = new Stock(59);
+		//place initial orders
+		s.placeOrder(3,100);
+		s.placeOrder(4,140);
 		ArrayList<Week> weeks = p.parseObjects();
 		ArrayList<Week> inputWeeks = p.parseObjects();
+		
 		int i = 0;
-		int counter = 0;
-		int weekNumber = 60;
 		while(i < inputWeeks.size()){			
 			s.restock();
 			//check if out of stock
@@ -49,7 +54,6 @@ public class Calculation {
 			//estimate
 			
 			i++;	
-			weekNumber ++;
 		}
 		System.out.println("Over");
 	}

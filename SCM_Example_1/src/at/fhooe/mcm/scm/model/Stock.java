@@ -23,6 +23,9 @@ public class Stock {
 	public Stock(){
 		iteration = 0;
 	}
+	public Stock(int initWeek){
+		iteration = initWeek;
+	}
 	
 	public void iterate(){
 		//checkRequiredOrders();
@@ -68,8 +71,6 @@ public class Stock {
 		averageProductD /= weekList.size();
 		averageProductE /= weekList.size();
 		
-		
-		
 		/*
 		 * How many of Px we needed peer week on average to fulfill the product orders
 		 */
@@ -94,19 +95,43 @@ public class Stock {
 		averagePart5 /= weekList.size();
 		
 		/* 
-		 * 
+		 * what is the difference to the stock, do the products need to be reordered
 		 */
-		
+		if(!isProductProducableByNumberOfProducts((int)averageProductA*3,a)){
+			placeOrder(1, (int)averageProductA);
+			placeOrder(3, (int)averageProductA);
+			placeOrder(4, (int)averageProductA*2);
+		}
+		if(!isProductProducableByNumberOfProducts((int)averageProductB*2,b)){
+			placeOrder(1, (int)averageProductB*2);
+			placeOrder(3, (int)averageProductB);
+			placeOrder(5, (int)averageProductB);
+		}
+		if(!isProductProducableByNumberOfProducts((int)averageProductC*3,c)){
+			placeOrder(2, (int)averageProductC*3);
+			placeOrder(4, (int)averageProductC);
+		}
+		if(!isProductProducableByNumberOfProducts((int)averageProductD*2,d)){
+			placeOrder(1, (int)averageProductD*3);
+			placeOrder(3, (int)averageProductD);
+			placeOrder(5, (int)averageProductD*2);
+		}
+		if(!isProductProducableByNumberOfProducts((int)averageProductE*3,e)){
+			placeOrder(1, (int)averageProductE);
+			placeOrder(2, (int)averageProductE*2);
+			placeOrder(4, (int)averageProductE*2);
+			placeOrder(5, (int)averageProductE*2);
+		}
 	}
 	
 	/* 
 	 * calculate the total of Px that are already placed in an order for the stock
 	 */
-	int  getTotalPlacedPart(int partId) {
+	int getTotalPlacedPart(int partId) {
 		int n = 0;
 		for(int z = 0; z < placedOrders.size(); z++){
 			if(placedOrders.get(z).partId == partId)
-				n+= placedOrders.get(z).ammount;
+				n+= placedOrders.get(z).amount;
 		}
 		return n;
 	}
@@ -121,6 +146,18 @@ public class Stock {
 				&& weekOrder.getTotalP3() <= nOfP3
 				&& weekOrder.getTotalP4() <= nOfP4
 				&& weekOrder.getTotalP5() <= nOfP5;
+	}
+	
+	/*
+	 * All products of same type in week
+	 */
+	boolean isProductProducableByNumberOfProducts(int nOfProducts, ProductIF p) {
+		int N  = nOfProducts;
+		return	   N * p.getP1() <= nOfP1
+				&& N * p.getP2() <= nOfP2
+				&& N * p.getP3() <= nOfP3
+				&& N * p.getP4() <= nOfP4
+				&& N * p.getP5() <= nOfP5;
 	}
 	
 	/*
@@ -152,19 +189,19 @@ public class Stock {
 			if(placedOrders.get(z).isCurrentWeek(iteration)){
 				switch (placedOrders.get(z).partId) {
 				case 1:
-					nOfP1+= placedOrders.get(z).ammount;
+					nOfP1+= placedOrders.get(z).amount;
 					break;
 				case 2:
-					nOfP2+= placedOrders.get(z).ammount;
+					nOfP2+= placedOrders.get(z).amount;
 					break;
 				case 3:
-					nOfP3+= placedOrders.get(z).ammount;
+					nOfP3+= placedOrders.get(z).amount;
 					break;
 				case 4:
-					nOfP4+= placedOrders.get(z).ammount;
+					nOfP4+= placedOrders.get(z).amount;
 					break;
 				case 5:
-					nOfP5+= placedOrders.get(z).ammount;;
+					nOfP5+= placedOrders.get(z).amount;;
 					break;
 				}
 			}
@@ -239,12 +276,12 @@ public class Stock {
 	private class Order {
 		int weekOfDelivery;
 		int partId;
-		int ammount;
+		int amount;
 		public Order(int weekOfDelivery, int partId, int ammount) {
 			super();
 			this.weekOfDelivery = weekOfDelivery;
 			this.partId = partId;
-			this.ammount = ammount;
+			this.amount = ammount;
 		}
 		public boolean isCurrentWeek(int week) {
 			return week == weekOfDelivery;
