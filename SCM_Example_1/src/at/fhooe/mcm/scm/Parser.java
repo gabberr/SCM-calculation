@@ -18,7 +18,7 @@ public class Parser {
 		// File file = new
 		// File(classLoader.getResource("SCM_Programming_Example_1.csv").getFile());
 		// String file = p.getFileName().toString();
-		String csvFile = "C://Users//Philipp//Desktop//Hagenberg//SupplyChain//SCM-calculation//SCM_Example_1//resources//SCM_Programming_Example_1.csv";
+		String csvFile = "C://Users//Philipp//Desktop//Hagenberg//SupplyChain//SCM-calculation//SCM_Example_1//resources//SCM_Programming_Example_1_inkl70.csv";
 		// String csvFileGaber =
 		// "C://Users//Philipp//Desktop//Hagenberg//SupplyChain//SCM-calculation//SCM_Example_1//resources//SCM_Programming_Example_1.csv";
 		BufferedReader br = null;
@@ -36,7 +36,7 @@ public class Parser {
 				lineInput = line.split(cvsSplitBy);
 				weekObject = new Week(lineInput[0], Integer.parseInt(lineInput[1]),Integer.parseInt(lineInput[2]),Integer.parseInt(lineInput[3]),Integer.parseInt(lineInput[4]),Integer.parseInt(lineInput[5]));
 				weeks.add(weekObject);
-				weekObject.printWeekOrderByParts();
+				//weekObject.printWeekOrderByParts();
 			}
 
 		} catch (FileNotFoundException e) {

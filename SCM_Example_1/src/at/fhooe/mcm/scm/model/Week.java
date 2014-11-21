@@ -1,6 +1,5 @@
 package at.fhooe.mcm.scm.model;
 
-import java.io.Console;
 import java.util.ArrayList;
 
 public class Week {
@@ -12,11 +11,11 @@ public class Week {
 	ProductIF proD = new ProductD();;
 	ProductIF proE = new ProductE();;
 
-	int nOfA;
-	int nOfB;
-	int nOfC;
-	int nOfD;
-	int nOfE;
+	public int nOfA;
+	public int nOfB;
+	public int nOfC;
+	public int nOfD;
+	public int nOfE;
 	
 	String weekName = "";
 	
