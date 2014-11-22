@@ -18,8 +18,8 @@ public class Parser {
 		// File file = new
 		// File(classLoader.getResource("SCM_Programming_Example_1.csv").getFile());
 		// String file = p.getFileName().toString();
-		String csvFile = "C://Users//Philipp//Desktop//Hagenberg//SupplyChain//SCM-calculation//SCM_Example_1//resources//SCM_Programming_Example_1_inkl70.csv";
-		// String csvFileGaber =
+		String csvFilePhilip = "C://Users//Philipp//Desktop//Hagenberg//SupplyChain//SCM-calculation//SCM_Example_1//resources//SCM_Programming_Example_1_inkl70.csv";
+		String csvFile ="/Users/gaber/Developer/SCM-calculation/SCM_Example_1/resources/SCM_Programming_Example_1_inkl70.csv";
 		// "C://Users//Philipp//Desktop//Hagenberg//SupplyChain//SCM-calculation//SCM_Example_1//resources//SCM_Programming_Example_1.csv";
 		BufferedReader br = null;
 		String line = "";

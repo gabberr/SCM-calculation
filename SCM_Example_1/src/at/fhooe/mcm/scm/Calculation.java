@@ -3,12 +3,17 @@ package at.fhooe.mcm.scm;
 import java.awt.List;
 import java.util.ArrayList;
 
+import at.fhooe.mcm.scm.model.ProductA;
+import at.fhooe.mcm.scm.model.ProductB;
+import at.fhooe.mcm.scm.model.ProductC;
+import at.fhooe.mcm.scm.model.ProductD;
+import at.fhooe.mcm.scm.model.ProductE;
 import at.fhooe.mcm.scm.model.Stock;
 import at.fhooe.mcm.scm.model.Week;
 
 /**
  * Calculation class for stock order estimation
- * @author Koller/Gaber
+ * @author Koller/Setina
  *
  */
 public class Calculation {
@@ -29,7 +34,23 @@ public class Calculation {
 	/**
 	 * @param args
 	 */
+	/**
+	 * @param args
+	 */
+	/**
+	 * @param args
+	 */
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
+		
+		ProductA a = new ProductA();
+		ProductB b = new ProductB();
+		ProductC c = new ProductC();
+		ProductD d = new ProductD();
+		ProductE e = new ProductE();
+		
 		Parser p = new Parser();
 		
 		//initialize stock
@@ -43,28 +64,31 @@ public class Calculation {
 		
 		int i = 60;
 		while(i < inputWeeks.size()){
+			
+			
 			s.iterate();
-			s.restock();
 			
-			if(s.iteration == 60){
-				s.placeOrder(1, 200);
-			}
-			
-			//produce orders
-			if(s.isAllProducable(inputWeeks.get(i))){
-				System.out.println("all producable");
-			}else{
-				System.out.println("not all producable");
-			}
-			s.produceAll(inputWeeks.get(i));
 			s.printStock();
+			int missed = 0;
+			missed += s.produceProductOfQuantity(c, inputWeeks.get(i).nOfC );
+			missed += s.produceProductOfQuantity(a, inputWeeks.get(i).nOfA );
+			missed += s.produceProductOfQuantity(b, inputWeeks.get(i).nOfB );
+			missed += s.produceProductOfQuantity(d, inputWeeks.get(i).nOfD );
+			missed += s.produceProductOfQuantity(e, inputWeeks.get(i).nOfE );
+			
+			System.out.println("Couldn't be produced: " + missed);
+//			s.printStock();
+//			LOG("Couldnt produce: " +missed);
+			
 
 			estimationList = new ArrayList<Week>(inputWeeks.subList(s.iteration-4, s.iteration-1));
 			//estimate
 			s.estimateOrders(estimationList);
 			i++;
-			s.costManagement(i);	
+			s.costManagement(i);
+			
 		}
+		s.printTotalCosts();
 		System.out.println("Over");
 	}
 	

@@ -1,6 +1,7 @@
 package at.fhooe.mcm.scm.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Stock {
 
@@ -12,6 +13,7 @@ public class Stock {
 	
 	//weekly variables
 	public int producedProducts;
+	public int notDeliveredProducts;
 	public int purchasedParts;
 	public int partsDeliveryCosts;
 	
@@ -38,8 +40,10 @@ public class Stock {
 		
 		//re-init calc variables
 		producedProducts = 0;
+		notDeliveredProducts=0;
 		purchasedParts = 0;
 		partsDeliveryCosts = 0;
+		restock();
 		
 	}
 	
@@ -105,49 +109,99 @@ public class Stock {
 		averagePart4 /= weekList.size();
 		averagePart5 /= weekList.size();
 		
-		/* 
-		 * what is the difference to the stock, do the products need to be reordered
-		 */
-		if(!isProductProducableByNumberOfProducts((int)averageProductA*3,a)){
+		
+		// using the product average to calculate the parts needed
+		int orderP1=0, orderP2=0, orderP3=0, orderP4=0, orderP5 = 0;
+		
+		orderP1 += averageProductA;
+		orderP1 += averageProductB * 2;
+		orderP1 += averageProductD * 3;
+		orderP1 += averageProductE;
+		
+		orderP2 += averageProductC * 3;
+		orderP2 += averageProductE * 2;
+		
+		orderP3 += averageProductA;
+		orderP3 += averageProductB;
+		orderP3 += averageProductD;
+		
+		orderP4 += averageProductA * 2;
+		orderP4 += averageProductC;
+		orderP4 += averageProductE * 2;
+		
+		orderP5 += averageProductB;
+		orderP5 += averageProductD * 2;
+		orderP5 += averageProductE * 2;
+		
+		
+		
+		
+		if(iteration<70) {
+//			if(nOfP1 < averagePart1 + getTotalPlacedPart(1))
+//				placeOrder(1, orderP1);
+//			if(nOfP2 < averagePart2 + getTotalPlacedPart(2))
+//				placeOrder(2, orderP2 );
+//			if(nOfP3 < averagePart3 + getTotalPlacedPart(3))
+//				placeOrder(3, orderP3 );
+//			if(nOfP4 < averagePart4 + getTotalPlacedPart(4))
+//				placeOrder(4, orderP4 );
+//			if(nOfP5 < averagePart5 + getTotalPlacedPart(5))
+//				placeOrder(5, orderP5);
+		
+		if(nOfP1 < averagePart1 + getTotalPlacedPart(1))
+			placeOrder(1, (int) (averagePart1));
+		if(nOfP2 < averagePart2 + getTotalPlacedPart(2))
+			placeOrder(2, (int) (averagePart2) );
+		if(nOfP3 < averagePart3 + getTotalPlacedPart(3))
+			placeOrder(3, (int) (averagePart3) );
+		if(nOfP4 < averagePart4 + getTotalPlacedPart(4))
+			placeOrder(4, (int) (averagePart4) );
+		if(nOfP5 < averagePart5 + getTotalPlacedPart(5))
+			placeOrder(5, (int) (averagePart5) );
+		}
+		
+
+		
+//		if(!isProductProducableByNumberOfProducts((int)averageProductA,a)){
 //			placeOrder(1, (int)averageProductA - getTotalPlacedPart(1));
 //			placeOrder(3, (int)averageProductA - getTotalPlacedPart(3));
 //			placeOrder(4, (int)averageProductA*2 - getTotalPlacedPart(4));
-			placeOrder(1, (int)averageProductA);
-			placeOrder(3, (int)averageProductA);
-			placeOrder(4, (int)averageProductA*2);
-		}
-		if(!isProductProducableByNumberOfProducts((int)averageProductB*2,b)){
+////			placeOrder(1, (int)averageProductA);
+////			placeOrder(3, (int)averageProductA);
+////			placeOrder(4, (int)averageProductA*2);
+//		}
+//		if(!isProductProducableByNumberOfProducts((int)averageProductB,b)){
 //			placeOrder(1, (int)averageProductB*2 - getTotalPlacedPart(1));
 //			placeOrder(3, (int)averageProductB - getTotalPlacedPart(3));
 //			placeOrder(5, (int)averageProductB - getTotalPlacedPart(5));
-			placeOrder(1, (int)averageProductB*2);
-			placeOrder(3, (int)averageProductB);
-			placeOrder(5, (int)averageProductB);
-		}
-		if(!isProductProducableByNumberOfProducts((int)averageProductC*3,c)){
+////			placeOrder(1, (int)averageProductB*2);
+////			placeOrder(3, (int)averageProductB);
+////			placeOrder(5, (int)averageProductB);
+//		}
+//		if(!isProductProducableByNumberOfProducts((int)averageProductC,c)){
 //			placeOrder(2, (int)averageProductC*3 - getTotalPlacedPart(2));
 //			placeOrder(4, (int)averageProductC - getTotalPlacedPart(4));
-			placeOrder(2, (int)averageProductC*3);
-			placeOrder(4, (int)averageProductC);
-		}
-		if(!isProductProducableByNumberOfProducts((int)averageProductD*2,d)){
+////			placeOrder(2, (int)averageProductC*3);
+////			placeOrder(4, (int)averageProductC);
+//		}
+//		if(!isProductProducableByNumberOfProducts((int)averageProductD,d)){
 //			placeOrder(1, (int)averageProductD*3 - getTotalPlacedPart(1));
 //			placeOrder(3, (int)averageProductD - getTotalPlacedPart(3));
 //			placeOrder(5, (int)averageProductD*2 - getTotalPlacedPart(5));
-			placeOrder(1, (int)averageProductD*3);
-			placeOrder(3, (int)averageProductD);
-			placeOrder(5, (int)averageProductD*2);
-		}
-		if(!isProductProducableByNumberOfProducts((int)averageProductE*3,e)){
+////			placeOrder(1, (int)averageProductD*3);
+////			placeOrder(3, (int)averageProductD);
+////			placeOrder(5, (int)averageProductD*2);
+//		}
+//		if(!isProductProducableByNumberOfProducts((int)averageProductE,e)){
 //			placeOrder(1, (int)averageProductE - getTotalPlacedPart(1));
 //			placeOrder(2, (int)averageProductE*2 - getTotalPlacedPart(2));
 //			placeOrder(4, (int)averageProductE*2 - getTotalPlacedPart(4));
 //			placeOrder(5, (int)averageProductE*2 - getTotalPlacedPart(5));
-			placeOrder(1, (int)averageProductE);
-			placeOrder(2, (int)averageProductE*2);
-			placeOrder(4, (int)averageProductE*2);
-			placeOrder(5, (int)averageProductE*2);
-		}
+////			placeOrder(1, (int)averageProductE);
+////			placeOrder(2, (int)averageProductE*2);
+////			placeOrder(4, (int)averageProductE*2);
+////			placeOrder(5, (int)averageProductE*2);
+//		}
 	}
 	
 	/* 
@@ -166,12 +220,20 @@ public class Stock {
 	 * Can we produce all of the products for the week order ( parts needed are in stock)
 	 */
 	public boolean isAllProducable(Week weekOrder) {
+		
+		int totalP1 = weekOrder.getTotalP1();
+		int totalP2 = weekOrder.getTotalP2();
+		int totalP3 = weekOrder.getTotalP3();
+		int totalP4 = weekOrder.getTotalP4();
+		int totalP5 = weekOrder.getTotalP5();
+		
+		
 			
-		return     weekOrder.getTotalP1() <= nOfP1
-				&& weekOrder.getTotalP2() <= nOfP2
-				&& weekOrder.getTotalP3() <= nOfP3
-				&& weekOrder.getTotalP4() <= nOfP4
-				&& weekOrder.getTotalP5() <= nOfP5;
+		return     totalP1 <= nOfP1
+				&& totalP2 <= nOfP2
+				&& totalP3 <= nOfP3
+				&& totalP4 <= nOfP4
+				&& totalP5 <= nOfP5;
 	}
 	
 	/*
@@ -179,11 +241,11 @@ public class Stock {
 	 */
 	public boolean isProductProducableByNumberOfProducts(int nOfProducts, ProductIF p) {
 		int N  = nOfProducts;
-		return	   N * p.getP1() <= nOfP1
-				&& N * p.getP2() <= nOfP2
-				&& N * p.getP3() <= nOfP3
-				&& N * p.getP4() <= nOfP4
-				&& N * p.getP5() <= nOfP5;
+		return	   N * p.getP1() <= nOfP1 + getTotalPlacedPart(1) 
+				&& N * p.getP2() <= nOfP2 + getTotalPlacedPart(2) 
+				&& N * p.getP3() <= nOfP3 + getTotalPlacedPart(3) 
+				&& N * p.getP4() <= nOfP4 + getTotalPlacedPart(4) 
+				&& N * p.getP5() <= nOfP5 + getTotalPlacedPart(5) ;
 	}
 	
 	/*
@@ -222,26 +284,36 @@ public class Stock {
 				case 1:
 					nOfP1+= placedOrders.get(z).amount;
 					purchasedParts += placedOrders.get(z).amount;
+					LOG("Parts P1 added to stock :  "+ placedOrders.get(z).amount );
+					placedOrders.get(z).amount=0;
 					orderedP1 = true;
 					break;
 				case 2:
 					nOfP2+= placedOrders.get(z).amount;
 					purchasedParts += placedOrders.get(z).amount;
+					LOG("Parts P2 added to stock: "+ placedOrders.get(z).amount );
+					placedOrders.get(z).amount=0;
 					orderedP2 = true;
 					break;
 				case 3:
 					nOfP3+= placedOrders.get(z).amount;
 					purchasedParts += placedOrders.get(z).amount;
+					LOG("Parts P3 added to stock: "+ placedOrders.get(z).amount );
+					placedOrders.get(z).amount=0;
 					orderedP3 = true;
 					break;
 				case 4:
 					nOfP4+= placedOrders.get(z).amount;
 					purchasedParts += placedOrders.get(z).amount;
+					LOG("Parts P4 added to stock"+ placedOrders.get(z).amount );
+					placedOrders.get(z).amount=0;
 					orderedP4 = true;
 					break;
 				case 5:
 					nOfP5+= placedOrders.get(z).amount;
 					purchasedParts += placedOrders.get(z).amount;
+					LOG("Parts P5 added to stock:  "+ placedOrders.get(z).amount );
+					placedOrders.get(z).amount=0;
 					orderedP5 = true;
 					break;
 				}
@@ -269,7 +341,7 @@ public class Stock {
 	 * Produces whole week
 	 */
 	public void produceAll(Week w){
-		LOG("Parts used for Production: " + "Week " + iteration + " Part 1:" + nOfP1 + " Part 2: " + nOfP2 + " Part 3: " + nOfP3 + " Part 4: " + nOfP4 + " Part 5: " + nOfP5);
+		LOG("Parts used for Production: " + "Week " + iteration + " Part 1:" + w.getTotalP1() + " Part 2: " + w.getTotalP2() + " Part 3: " + w.getTotalP3() + " Part 4: " + w.getTotalP4() + " Part 5: " + w.getTotalP5());
 		
 		nOfP1 -= w.getTotalP1();
 		nOfP2 -= w.getTotalP2();
@@ -278,11 +350,11 @@ public class Stock {
 		nOfP5 -= w.getTotalP5();
 		
 		producedProducts = w.nOfA + w.nOfB+ w.nOfC + w.nOfD + w.nOfE;
-	//	LOG("Products produced: " + "Week " + " ;ProA " + w.nOfA + " ;ProB " + w.nOfB + " ;ProC " + w.nOfC + " ;ProD " + w.nOfD + " ;ProE " + w.nOfE);
+		LOG("Products produced: " + "Week " + " ;ProA " + w.nOfA + " ;ProB " + w.nOfB + " ;ProC " + w.nOfC + " ;ProD " + w.nOfD + " ;ProE " + w.nOfE);
 	}
 	
 	public void printStock(){
-		System.out.println("Current Stock " + "Week " + iteration + " Part 1: " + nOfP1 + " Part 2: " + nOfP2 + " Part 3: " + nOfP3 + " Part 4: " + nOfP4 + " Part 5: " + nOfP5);
+		System.out.println("Week " + iteration + " Stock:\n " + "P1: " + nOfP1 + "\n P2: " + nOfP2 + "\n P3: " + nOfP3 + "\n P4: " + nOfP4 + "\n P5: " + nOfP5);
 	}
 	
 	/*
@@ -298,14 +370,19 @@ public class Stock {
 			nOfP3 -=  p.getP3();
 			nOfP4 -=  p.getP4();
 			nOfP5 -=  p.getP5();
+			producedProducts++;
 			produced++;
 		}
 		LOG("Produced product " + p.toString() + " :  "+produced + "/" + quantity);
+		int notDelivered = quantity - produced;
 		
-		return quantity -produced;
+		notDeliveredProducts += notDelivered;
+		
+		return notDelivered;
 	}
 	
 	public void placeOrder(int partId, int ammount) {
+		LOG("Order of P" + partId+" placed with ammount: " +ammount);
 		
 		switch (partId) {
 		case 1:
@@ -351,11 +428,31 @@ public class Stock {
 		}
 	}
 	
+	public ArrayList<Costs> allCost = new ArrayList<Stock.Costs>();
 	public void costManagement(int weekNumber){
 		Costs costs = new Costs();
 		int numberOfPartsOnStock = nOfP1 + nOfP2 + nOfP3 + nOfP4 + nOfP5;
-		costs.calculateProfit(producedProducts, purchasedParts, numberOfPartsOnStock, 0, partsDeliveryCosts);
+		costs.calculateProfit(producedProducts, purchasedParts, numberOfPartsOnStock, notDeliveredProducts, partsDeliveryCosts);
 		costs.printData(weekNumber);
+		allCost.add(costs);	
+	}
+	public void printTotalCosts() {
+		double earnings =0;
+		double costs =0;
+		int unsoldProducts=0;
+		double profit=0;
+		
+		for (int i = 0; i < allCost.size(); i++) {
+			Costs c = allCost.get(i);
+			
+			earnings += c.earnings;
+			costs += c.costs;
+			unsoldProducts += c.unsoldProducts;
+			profit += c.profit;
+			
+		}
+		System.out.println("Results Total: " + allCost.size() + " Earnings: " + earnings + "; Costs: " + costs + ";  Unsold Products " + unsoldProducts + "; Profit " + profit);
+		
 	}
 	
 	private class Costs {
@@ -381,8 +478,8 @@ public class Stock {
 		}
 		
 		private void printData(int weekNumber){
-		//	System.out.println("Results for week: " + weekNumber + " Earnings: " + earnings + "; Costs: " + costs + "; Unsold Products " + unsoldProducts + "; Profit " + profit);
-			System.out.println("Results for week: " + weekNumber + " Earnings: " + earnings + "; Costs: " + costs + "; Profit " + profit);
+			System.out.println("Results for week: " + weekNumber + " Earnings: " + earnings + "; Costs: " + costs + "; Unsold Products " + unsoldProducts + "; Profit " + profit);
+//			System.out.println("Results for week: " + weekNumber + " Earnings: " + earnings + "; Costs: " + costs + "; Profit " + profit + );
 		}
 	}
 	

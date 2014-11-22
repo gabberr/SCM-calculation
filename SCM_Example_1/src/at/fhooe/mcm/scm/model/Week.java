@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class Week {
 
 	ArrayList<ProductIF> products = new ArrayList();
-	ProductIF proA = new ProductA();
-	ProductIF proB = new ProductB();;
-	ProductIF proC = new ProductC();;
-	ProductIF proD = new ProductD();;
+	private ProductIF proA = new ProductA();
+	private ProductIF proB = new ProductB();;
+	private ProductIF proC = new ProductC();;
+	private ProductIF proD = new ProductD();;
 	ProductIF proE = new ProductE();;
 
 	public int nOfA;
@@ -87,5 +87,12 @@ public class Week {
 		
 		
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return weekName;
+	}
+	
 
 }
