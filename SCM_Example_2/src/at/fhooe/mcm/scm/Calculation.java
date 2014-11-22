@@ -2,6 +2,7 @@ package at.fhooe.mcm.scm;
 
 import java.util.ArrayList;
 
+import at.fhooe.mcm.scm.model.Stock;
 import at.fhooe.mcm.scm.model.Week;
 
 /**
@@ -31,40 +32,28 @@ public class Calculation {
 		Parser p = new Parser();
 		p.parseObjects();
 		//initialize stock
-//		Stock s = new Stock(59);
-//		//place initial orders
-//		s.placeOrder(3,100);
-//		s.placeOrder(4,140);
-//		s.iterate();
-//		ArrayList<Week> inputWeeks = p.parseObjects();
-//		ArrayList<Week> estimationList;
+		Stock s = new Stock(0);
+
+
+		ArrayList<Week> inputWeeks = p.parseObjects();
+
 //		
-//		int i = 60;
-//		while(i < inputWeeks.size()){
-//			s.iterate();
-//			s.restock();
-//			
-//			if(s.iteration == 60){
-////				s.placeOrder(1, 300);
-////				s.placeOrder(5, 100);
-//			}
-//			
-//			//produce orders
-//			if(s.isAllProducable(inputWeeks.get(i))){
-//				System.out.println("all producable");
-//			}else{
-//				System.out.println("not all producable");
-//			}
-//			s.produceAll(inputWeeks.get(i));
-//			s.printStock();
-//
+		int i = 0;
+		while(i < inputWeeks.size()){
+			s.iterate();
+			s.initializeParts(inputWeeks.get(i));
+			
+			s.calculatTotesRequiered();
+			System.out.println(i);
+
 //			estimationList = new ArrayList<Week>(inputWeeks.subList(s.iteration-4, s.iteration-1));
-//			//estimate
+			//estimate
 //			s.estimateOrders(estimationList);
-//			i++;
+			i++;
 //			s.costManagement(i);	
-//		}
-//		System.out.println("Over");
+		}
+		s.printTotal();
+		System.out.println("Over");
 	}
 	
 	public void estimateOrders(int partId){

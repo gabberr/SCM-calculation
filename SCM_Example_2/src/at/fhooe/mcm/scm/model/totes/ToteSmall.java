@@ -21,8 +21,8 @@ public class ToteSmall implements ToteIF{
 		return filledVolume + p.getVolume() <= totalVolume;
 	}
 	@Override
-	public double addPart(PartIF p) {
-		return addPart(p);
+	public void addPart(PartIF p) {
+		filledVolume += p.getVolume();
 	}
 	@Override
 	public double getFilledVolume() {

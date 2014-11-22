@@ -18,7 +18,7 @@ public class Parser {
 		// File file = new
 		// File(classLoader.getResource("SCM_Programming_Example_1.csv").getFile());
 		// String file = p.getFileName().toString();
-		String csvFile = "C://Users//Philipp//Desktop//Hagenberg//SupplyChain//SCM-calculation//SCM_Example_1//resources//SCM_Programming_Example_1_complete.csv";
+		String csvFile ="/Users/gaber/Developer/SCM-calculation/SCM_Example_1/resources/SCM_Programming_Example_1_complete.csv";
 		// String csvFileGaber =
 		// "C://Users//Philipp//Desktop//Hagenberg//SupplyChain//SCM-calculation//SCM_Example_1//resources//SCM_Programming_Example_1.csv";
 		BufferedReader br = null;
