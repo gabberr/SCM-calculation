@@ -284,7 +284,7 @@ public class Stock {
 				case 1:
 					nOfP1+= placedOrders.get(z).amount;
 					purchasedParts += placedOrders.get(z).amount;
-					LOG("Parts P1 added to stock :  "+ placedOrders.get(z).amount );
+					LOG("Parts P1 added to stock: "+ placedOrders.get(z).amount );
 					placedOrders.get(z).amount=0;
 					orderedP1 = true;
 					break;
@@ -305,14 +305,14 @@ public class Stock {
 				case 4:
 					nOfP4+= placedOrders.get(z).amount;
 					purchasedParts += placedOrders.get(z).amount;
-					LOG("Parts P4 added to stock"+ placedOrders.get(z).amount );
+					LOG("Parts P4 added to stock: "+ placedOrders.get(z).amount );
 					placedOrders.get(z).amount=0;
 					orderedP4 = true;
 					break;
 				case 5:
 					nOfP5+= placedOrders.get(z).amount;
 					purchasedParts += placedOrders.get(z).amount;
-					LOG("Parts P5 added to stock:  "+ placedOrders.get(z).amount );
+					LOG("Parts P5 added to stock: "+ placedOrders.get(z).amount );
 					placedOrders.get(z).amount=0;
 					orderedP5 = true;
 					break;
@@ -447,7 +447,7 @@ public class Stock {
 			
 			earnings += c.earnings;
 			costs += c.costs;
-			unsoldProducts += c.unsoldProducts;
+			unsoldProducts += c.nOfNotDelivered;
 			profit += c.profit;
 			
 		}
@@ -458,12 +458,13 @@ public class Stock {
 	private class Costs {
 		double earnings;
 		double costs;
-		int unsoldProducts;
+		int nOfNotDelivered;
 		double profit;
 		
-		private double calculateProfit(int soldProducts, int purchasedParts, int nOfPartsOnStock, int nOfNotDelivered, int nOfDifferentPartsDelivered){
+		private double calculateProfit(int soldProducts, int purchasedParts, int nOfPartsOnStock, int nOfNotDelivered_, int nOfDifferentPartsDelivered){
+			nOfNotDelivered = nOfNotDelivered_;
 			profit = calculateEarnings(soldProducts) - calculateCosts( purchasedParts, nOfPartsOnStock, nOfNotDelivered, nOfDifferentPartsDelivered);
-			unsoldProducts = nOfNotDelivered;
+			
 			return profit;
 		}
 		
@@ -478,7 +479,7 @@ public class Stock {
 		}
 		
 		private void printData(int weekNumber){
-			System.out.println("Results for week: " + weekNumber + " Earnings: " + earnings + "; Costs: " + costs + "; Unsold Products " + unsoldProducts + "; Profit " + profit);
+			System.out.println("Results for week: " + weekNumber + " Earnings: " + earnings + "; Costs: " + costs + "; No delivered " + nOfNotDelivered + "; Profit " + profit);
 //			System.out.println("Results for week: " + weekNumber + " Earnings: " + earnings + "; Costs: " + costs + "; Profit " + profit + );
 		}
 	}
