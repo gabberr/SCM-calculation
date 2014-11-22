@@ -76,12 +76,12 @@ public class Calculation {
 			missed += s.produceProductOfQuantity(d, inputWeeks.get(i).nOfD );
 			missed += s.produceProductOfQuantity(e, inputWeeks.get(i).nOfE );
 			
-			System.out.println("Couldn't be produced: " + missed);
+			System.out.println("					Couldn't be produced: " + missed);
 //			s.printStock();
 //			LOG("Couldnt produce: " +missed);
 			
 
-			estimationList = new ArrayList<Week>(inputWeeks.subList(s.iteration-4, s.iteration-1));
+			estimationList = new ArrayList<Week>(inputWeeks.subList(s.iteration-3, s.iteration-1));
 			//estimate
 			s.estimateOrders(estimationList);
 			i++;
