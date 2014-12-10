@@ -23,10 +23,21 @@ public class ToteSmall implements ToteIF{
 	@Override
 	public void addPart(PartIF p) {
 		filledVolume += p.getVolume();
+		addedParts.add(p);
 	}
 	@Override
 	public double getFilledVolume() {
 		return filledVolume;
+	}
+
+	@Override
+	public int getWalkingTime() {
+		int time=0;
+		for (int i = 0; i < addedParts.size()-1; i++) {
+			time += addedParts.get(i).calculateWalkingTimeTo(addedParts.get(i+1));
+			
+		}
+		return time;
 	}
 
 }

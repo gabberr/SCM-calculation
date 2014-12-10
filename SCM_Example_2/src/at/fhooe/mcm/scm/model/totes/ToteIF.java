@@ -8,4 +8,5 @@ public interface ToteIF {
 	boolean isAddable(PartIF p);
 	void addPart(PartIF p);
 	double getFilledVolume();
+	int getWalkingTime();
 }
