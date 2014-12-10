@@ -127,12 +127,20 @@ public class Stock {
 			}
 			
 		}
-		System.out.println(""+nOfp1Left + " "+ nOfp2Left + " "+nOfp3Left + " "+nOfp4Left +" "+nOfp5Left);
+//		System.out.println(""+nOfp1Left + " "+ nOfp2Left + " "+nOfp3Left + " "+nOfp4Left +" "+nOfp5Left);
 		
 		totalBig += totesBig.size() * 5;
 		totalSmall += totesSmall.size() * 5;
-//		System.out.println("Big totes used:" + totesBig.size());
-//		System.out.println("Small totes used:" + totesSmall.size());
+		
+		System.out.println("Big totes used:" + totesBig.size()); // per day!
+		System.out.println("Small totes used:" + totesSmall.size());
+		for (int i = 0; i < totesBig.size(); i++) {
+			totesBig.get(i).printToteParts();
+		}
+		for (int i = 0; i < totesSmall.size(); i++) {
+			totesSmall.get(i).printToteParts();
+		}
+		
 		
 		
 		

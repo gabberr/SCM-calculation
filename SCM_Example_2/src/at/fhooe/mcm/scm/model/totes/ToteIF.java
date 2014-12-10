@@ -8,5 +8,9 @@ public interface ToteIF {
 	boolean isAddable(PartIF p);
 	void addPart(PartIF p);
 	double getFilledVolume();
+	void printToteParts();
 	int getWalkingTime();
+	int getLowestPartID();
+	int getHighestPartID();
+	boolean hasPart(PartIF p);
 }

@@ -36,5 +36,40 @@ public class ToteBig implements ToteIF{
 		}
 		return time;
 	}
+	@Override
+	public void printToteParts() {
+		String output="Big: ";
+		for (int i = 0; i < addedParts.size(); i++) {
+			output += ""+addedParts.get(i).getPartId();
+		}
+		System.out.println("Parts in tote: " + output);
+		
+	}
+	@Override
+	public int getLowestPartID() {
+		int id = 5;
+		for (int i = 0; i < addedParts.size(); i++) {
+			if(addedParts.get(i).getPartId()<id)
+				id = addedParts.get(i).getPartId();
+		}
+		return id;
+	}
 
+	@Override
+	public int getHighestPartID() {
+		int id = 1;
+		for (int i = 0; i < addedParts.size(); i++) {
+			if(addedParts.get(i).getPartId()>id)
+				id = addedParts.get(i).getPartId();
+		}
+		return id;
+	}
+	@Override
+	public boolean hasPart(PartIF p) {
+		for (int i = 0; i < addedParts.size(); i++) {
+			if(addedParts.get(i).getPartId() == p.getPartId())
+				return true;
+		}
+		return false;
+	}
 }
