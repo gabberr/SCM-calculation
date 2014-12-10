@@ -13,14 +13,19 @@ public class RunLL implements RunIF {
 
 	ToteBig t1;
 	ToteBig t2;
+	
+	
+	
 	public RunLL(ToteBig _t1, ToteBig _t2) {
 		t1=_t1;
 		t2=_t2;
 	}
 	@Override
 	public double getTotalTime() {
+		int basic = 30 + 15 + 15 + 60;
+		int pathCost = RunPathCosts.getTotalPathCosts(getPartPath());
 
-		return 0;
+		return basic + pathCost;
 	}
 
 	@Override
@@ -68,6 +73,7 @@ public class RunLL implements RunIF {
 			path.add(4);
 		if(t2.hasPart(new PartFive()) && !t1.hasPart(new PartFive()))
 			path.add(5);
+		
 		return path;
 	}
 
