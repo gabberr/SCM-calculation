@@ -14,7 +14,7 @@ public class RunLL implements RunIF {
 	ToteBig t1;
 	ToteBig t2;
 	
-	int basic = 30 + 15 + 15 + 60;
+	
 	
 	public RunLL(ToteBig _t1, ToteBig _t2) {
 		t1=_t1;
@@ -22,9 +22,10 @@ public class RunLL implements RunIF {
 	}
 	@Override
 	public double getTotalTime() {
-		
+		int basic = 30 + 15 + 15 + 60;
+		int pathCost = RunPathCosts.getTotalPathCosts(getPartPath());
 
-		return 0;
+		return basic + pathCost;
 	}
 
 	@Override
