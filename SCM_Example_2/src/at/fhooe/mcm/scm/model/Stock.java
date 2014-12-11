@@ -1,13 +1,17 @@
 package at.fhooe.mcm.scm.model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 
 import at.fhooe.mcm.scm.model.part.PartFive;
 import at.fhooe.mcm.scm.model.part.PartFour;
 import at.fhooe.mcm.scm.model.part.PartOne;
 import at.fhooe.mcm.scm.model.part.PartThree;
 import at.fhooe.mcm.scm.model.part.PartTwo;
+import at.fhooe.mcm.scm.model.run.RunIF;
+import at.fhooe.mcm.scm.model.run.RunLL;
+import at.fhooe.mcm.scm.model.run.RunLS;
+import at.fhooe.mcm.scm.model.run.RunSS;
 import at.fhooe.mcm.scm.model.totes.ToteBig;
 import at.fhooe.mcm.scm.model.totes.ToteIF;
 import at.fhooe.mcm.scm.model.totes.ToteSmall;
@@ -29,6 +33,8 @@ public class Stock {
 	
 	private int totalSmall =0;
 	private int totalBig =0;
+	
+	public int totalRunTime=0;
 	
 	PartOne p1 = new PartOne();
 	PartTwo p2 = new PartTwo();
@@ -140,15 +146,70 @@ public class Stock {
 		for (int i = 0; i < totesSmall.size(); i++) {
 			totesSmall.get(i).printToteParts();
 		}
+		totesToRuns();
 		
 		
 		
 		
 	}
+	public void totesToRuns(){
+		
+//		totesBig
+//		totesSmall
+		ArrayList<RunIF> runs = new ArrayList<RunIF>();
+		RunLL big;
+		RunSS small;
+		RunLS mixed;
+		boolean over = false;
+		
+			while(totesBig.size() > 1) {
+				big = new RunLL( ( ToteBig) totesBig.get(0), ( ToteBig)  totesBig.get(1));
+				totesBig.remove(0);
+				totesBig.remove(0);
+				runs.add(big);
+				
+			}
+			// 
+			if(totesBig.size() == 1) {
+				mixed = new RunLS(( ToteBig)totesBig.get(0));
+				totesBig.remove(0);
+				while ( mixed.isAddable() && totesSmall.size() >0) {
+					mixed.addSmallTote((ToteSmall) totesSmall.remove(0));
+				}
+				runs.add(mixed);
+				
+			}
+
+			while (totesSmall.size() > 0) {
+				small = new RunSS();
+				while ( small.isAddable() && totesSmall.size() >0) {
+					small.addSmallTote((ToteSmall) totesSmall.remove(0));
+				}
+				runs.add(small);
+				
+			}
+		
+			System.out.println("Big totes size :" + totesBig.size());
+			System.out.println("Small totes size : " + totesSmall.size());
+		
+			int total = 0;
+			for (int i = 0; i < runs.size(); i++) {
+				total +=runs.get(i).getTotalTime();
+				System.out.println("Run : " + runs.get(i).getPartPath().toString());
+				System.out.println("Run cost per day this week : " + runs.get(i).getTotalTime());
+				
+			}
+			totalRunTime += total*5;
+			System.out.println("Runs per day this week : " + runs.size());
+			System.out.println("Pick time of the week : " + total * 5);
+		
+	}
+	
 	
 	public void printTotal() {
 		System.out.println("Big totes used:" + totalBig);
 		System.out.println("Small totes used: " + totalSmall);
+		System.out.println("Total time of picking " + totalRunTime + "seconds");
 	}
 	
 	

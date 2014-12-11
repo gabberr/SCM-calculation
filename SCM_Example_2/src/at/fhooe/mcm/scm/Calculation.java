@@ -44,6 +44,7 @@ public class Calculation {
 			s.initializeParts(inputWeeks.get(i));
 			
 			s.calculatTotesRequiered();
+			
 			System.out.println(i);
 
 //			estimationList = new ArrayList<Week>(inputWeeks.subList(s.iteration-4, s.iteration-1));
@@ -53,6 +54,7 @@ public class Calculation {
 //			s.costManagement(i);	
 		}
 		s.printTotal();
+		
 		System.out.println("Over");
 	}
 	

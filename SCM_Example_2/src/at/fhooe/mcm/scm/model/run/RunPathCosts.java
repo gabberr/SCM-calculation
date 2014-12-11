@@ -1,6 +1,7 @@
 package at.fhooe.mcm.scm.model.run;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class RunPathCosts {
 	
@@ -20,8 +21,9 @@ public class RunPathCosts {
 	}
 	
 	static int getTotalPathCosts( ArrayList<Integer> path) {
+//		Collections.sort(path);
 		int total = 0;
-		for(int i = 0; i< path.size() +1 ; i++)
+		for(int i = 0; i< path.size() - 1 ; i++)
 		{
 			int current = path.get(i);
 			int next = path.get(i+1);

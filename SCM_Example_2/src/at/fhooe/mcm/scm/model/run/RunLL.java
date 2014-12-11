@@ -1,6 +1,7 @@
 package at.fhooe.mcm.scm.model.run;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import at.fhooe.mcm.scm.model.part.PartFive;
 import at.fhooe.mcm.scm.model.part.PartFour;
@@ -22,7 +23,7 @@ public class RunLL implements RunIF {
 	}
 	@Override
 	public double getTotalTime() {
-		int basic = 30 + 15 + 15 + 60;
+		int basic = 30 + 15 + 15 + 60 + 120;
 		int pathCost = RunPathCosts.getTotalPathCosts(getPartPath());
 
 		return basic + pathCost;
@@ -73,7 +74,7 @@ public class RunLL implements RunIF {
 			path.add(4);
 		if(t2.hasPart(new PartFive()) && !t1.hasPart(new PartFive()))
 			path.add(5);
-		
+		Collections.sort(path);
 		return path;
 	}
 

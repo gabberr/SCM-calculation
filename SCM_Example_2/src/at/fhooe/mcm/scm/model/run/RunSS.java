@@ -1,6 +1,7 @@
 package at.fhooe.mcm.scm.model.run;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import at.fhooe.mcm.scm.model.part.PartFive;
 import at.fhooe.mcm.scm.model.part.PartFour;
@@ -41,9 +42,9 @@ public class RunSS implements RunIF{
 			basicCostsSmallTote += 5;
 		}
 		int totalBasicCosts = basicCosts + basicCostsSmallTote;
+		int pathCost = RunPathCosts.getTotalPathCosts(getPartPath());
 		
-		
-		return 0;
+		return totalBasicCosts + pathCost;
 	}
 
 	@Override
@@ -86,7 +87,7 @@ public class RunSS implements RunIF{
 			if (tSmall.hasPart(new PartFive()) && !path.contains(5))
 				path.add(5);
 		}
-		
+		Collections.sort(path);
 		return path;
 	}
 }
