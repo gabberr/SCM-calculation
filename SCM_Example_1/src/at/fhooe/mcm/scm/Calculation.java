@@ -67,7 +67,8 @@ public class Calculation {
 			
 			
 			s.iterate();
-			
+			System.out.println("      ");
+			System.out.println("----- New week -----");
 			s.printStock();
 			int missed = 0;
 			missed += s.produceProductOfQuantity(c, inputWeeks.get(i).nOfC );
@@ -77,7 +78,8 @@ public class Calculation {
 			missed += s.produceProductOfQuantity(e, inputWeeks.get(i).nOfE );
 			
 			System.out.println("					Couldn't be produced: " + missed);
-//			s.printStock();
+			System.out.println("----- Stock after -----");
+			s.printStock();
 //			LOG("Couldnt produce: " +missed);
 			
 

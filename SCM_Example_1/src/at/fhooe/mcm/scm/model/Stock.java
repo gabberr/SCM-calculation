@@ -150,18 +150,40 @@ public class Stock {
 //				placeOrder(5, orderP5);
 		
 		// for fine tuning part ordering
-		double p1k = 0.985, p2k=1.035, p3k=1.013, p4k=0.921, p5k=0.971;
+		double p1k = 0.982, p2k=1.036, p3k=1, p4k=0.921, p5k=0.975;
 //		double p1k = 1, p2k=1, p3k=1, p4k=1, p5k=1;
 		
-		if(nOfP1 < averagePart1 + getTotalPlacedPart(1) )
+		int placed1 = getTotalPlacedPart(1);
+		int placed2 =  getTotalPlacedPart(2);
+		int placed3 =  getTotalPlacedPart(3);
+		int placed4 = getTotalPlacedPart(4);
+		int placed5 =getTotalPlacedPart(5);
+		
+		
+		if(iteration==61) {
+			placeOrder(2, 65);
+			placeOrder(3, 35);
+		}
+		if(iteration==62) {
+			placeOrder(4, 85);
+		}
+		if(iteration==63) {
+			placeOrder(4, 50);
+		}
+		
+		if(nOfP1 < ( averagePart1  ) )
 			placeOrder(1, (int) (averagePart1 * p1k ));
-		if(nOfP2 < averagePart2 + getTotalPlacedPart(2))
+		
+		if(nOfP2 < averagePart2 )
 			placeOrder(2, (int) (averagePart2 * p2k) );
-		if(nOfP3 < averagePart3 + getTotalPlacedPart(3))
+		
+		if(nOfP3 < averagePart3 )
 			placeOrder(3, (int) (averagePart3 * p3k) );
-		if(nOfP4 < averagePart4 + getTotalPlacedPart(4))
+		
+		if(nOfP4 < averagePart4 )
 			placeOrder(4, (int) (averagePart4 * p4k ) );
-		if(nOfP5 < averagePart5 + getTotalPlacedPart(5))
+		
+		if(nOfP5 < averagePart5 )
 			placeOrder(5, (int) (averagePart5 * p5k) );
 		
 		totalNotDeliveredProducts += notDeliveredProducts;
