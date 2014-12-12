@@ -86,6 +86,7 @@ public class Calculation {
 			s.estimateOrders(estimationList);
 			i++;
 			s.costManagement(i);
+			System.out.println(" Total not delivered" + s.totalNotDeliveredProducts);
 			
 		}
 		s.printTotalCosts();

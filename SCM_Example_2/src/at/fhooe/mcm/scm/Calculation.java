@@ -42,10 +42,10 @@ public class Calculation {
 		while(i < inputWeeks.size()){
 			s.iterate();
 			s.initializeParts(inputWeeks.get(i));
-			
+			System.out.println("Week "+ i);
 			s.calculatTotesRequiered();
 			
-			System.out.println(i);
+			
 
 //			estimationList = new ArrayList<Week>(inputWeeks.subList(s.iteration-4, s.iteration-1));
 			//estimate

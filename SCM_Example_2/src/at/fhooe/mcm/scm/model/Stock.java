@@ -94,29 +94,28 @@ public class Stock {
 			}
 			
 		}
-		
+//		optimized  filling up
 		for(int i=0; i< totesBig.size(); i++) {
-			while( totesBig.get(i).isAddable(p5) && nOfp5Left>0 ) {
-				totesBig.get(i).addPart(p5);
-				nOfp5Left--;
-			}
+			
 			while( totesBig.get(i).isAddable(p2) && nOfp2Left>0 ) {
 				totesBig.get(i).addPart(p2);
 				nOfp2Left--;
 			}
-			while( totesBig.get(i).isAddable(p4) && nOfp4Left>0 ) {
-				totesBig.get(i).addPart(p4);
-				nOfp4Left--;
-			}
+//			while( totesBig.get(i).isAddable(p4) && nOfp4Left>0 ) {
+//				totesBig.get(i).addPart(p4);
+//				nOfp4Left--;
+//			}
+//			while( totesBig.get(i).isAddable(p5) && nOfp5Left>0 ) {
+//				totesBig.get(i).addPart(p5);
+//				nOfp5Left--;
+//			}
 			
 		}
+		
 		over = false;
 		while(!over) {
 			small = new ToteSmall();
-			while( small.isAddable(p5) && nOfp5Left>0 ) {
-				small.addPart(p5);
-				nOfp5Left--;
-			}
+			
 			while( small.isAddable(p2) && nOfp2Left>0 ) {
 				small.addPart(p2);
 				nOfp2Left--;
@@ -125,7 +124,10 @@ public class Stock {
 				small.addPart(p4);
 				nOfp4Left--;
 			}
-
+			while( small.isAddable(p5) && nOfp5Left>0 ) {
+				small.addPart(p5);
+				nOfp5Left--;
+			}
 			totesSmall.add(small);
 			
 			if( nOfp2Left <= 0 && nOfp4Left <= 0 && nOfp5Left <= 0) {
@@ -162,6 +164,24 @@ public class Stock {
 		RunLS mixed;
 		boolean over = false;
 		
+//			while(totesBig.size() > 1) {
+//				big = new RunLL( ( ToteBig) totesBig.get(0), ( ToteBig)  totesBig.get(1));
+//				totesBig.remove(0);
+//				totesBig.remove(0);
+//				runs.add(big);
+//				
+//			}
+//			// 
+//			if(totesBig.size() == 1) {
+//				mixed = new RunLS(( ToteBig)totesBig.get(0));
+//				totesBig.remove(0);
+//				while ( mixed.isAddable() && totesSmall.size() >0) {
+//					mixed.addSmallTote((ToteSmall) totesSmall.remove(0));
+//				}
+//				runs.add(mixed);
+//				
+//			}
+			
 			while(totesBig.size() > 1) {
 				big = new RunLL( ( ToteBig) totesBig.get(0), ( ToteBig)  totesBig.get(1));
 				totesBig.remove(0);
@@ -170,7 +190,7 @@ public class Stock {
 				
 			}
 			// 
-			if(totesBig.size() == 1) {
+			while(totesBig.size() > 0) {
 				mixed = new RunLS(( ToteBig)totesBig.get(0));
 				totesBig.remove(0);
 				while ( mixed.isAddable() && totesSmall.size() >0) {
@@ -179,6 +199,9 @@ public class Stock {
 				runs.add(mixed);
 				
 			}
+			
+			
+			
 
 			while (totesSmall.size() > 0) {
 				small = new RunSS();

@@ -14,6 +14,7 @@ public class Stock {
 	//weekly variables
 	public int producedProducts;
 	public int notDeliveredProducts;
+	public int totalNotDeliveredProducts = 0;
 	public int purchasedParts;
 	public int partsDeliveryCosts;
 	
@@ -150,7 +151,7 @@ public class Stock {
 		
 		// for fine tuning part ordering
 		double p1k = 0.985, p2k=1.035, p3k=1.013, p4k=0.921, p5k=0.971;
-		
+//		double p1k = 1, p2k=1, p3k=1, p4k=1, p5k=1;
 		
 		if(nOfP1 < averagePart1 + getTotalPlacedPart(1) )
 			placeOrder(1, (int) (averagePart1 * p1k ));
@@ -162,10 +163,26 @@ public class Stock {
 			placeOrder(4, (int) (averagePart4 * p4k ) );
 		if(nOfP5 < averagePart5 + getTotalPlacedPart(5))
 			placeOrder(5, (int) (averagePart5 * p5k) );
+		
+		totalNotDeliveredProducts += notDeliveredProducts;
 		}
+		
+	
+//			placeOrder(1, (int) (averagePart1 * p1k ));
+//			
+//			placeOrder(2, (int) (averagePart2 * p2k ));
+//	
+//			placeOrder(3, (int) (averagePart3 * p3k) );
+//	
+//			placeOrder(4, (int) (averagePart4 * p4k ) );
+//	
+//			placeOrder(5, (int) (averagePart5 * p5k) );
+		
+		
 		
 
 		
+//		}
 //		if(!isProductProducableByNumberOfProducts((int)averageProductA,a)){
 //			placeOrder(1, (int)averageProductA - getTotalPlacedPart(1));
 //			placeOrder(3, (int)averageProductA - getTotalPlacedPart(3));
